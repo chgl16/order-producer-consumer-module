@@ -1,0 +1,19 @@
+# RabbitMQ配置
+spring:
+  rabbitmq:
+    addresses: 127.0.0.1
+    port: 15672
+    username: root
+    password: mima
+    connection-timeout: 15000
+    listener:   # 消费者配置
+      simple:
+        concurrency: 5
+        max-concurrency: 10
+        acknowledge-mode: manual  # 手动签收消息
+
+# 服务路径和端口配置
+server:
+  servlet:
+    context-path: /
+  port: 8002

@@ -1,0 +1,15 @@
+# RabbitMQ的配置
+spring:
+  rabbitmq:
+    addresses: 127.0.0.1
+    port: 15672
+    username: root
+    password: mima
+    virtual-host: /
+    connection-timeout: 15000
+
+# 服务路径和端口配置
+server:
+  servlet:
+    context-path: /
+  port: 8001
