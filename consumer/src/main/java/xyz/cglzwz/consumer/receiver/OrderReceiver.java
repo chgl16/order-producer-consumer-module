@@ -12,7 +12,7 @@ import xyz.cglzwz.common.entity.Order;
 import java.util.Map;
 
 /**
- * 接收消息
+ * 消费者接收消息消费
  * @author chgl16
  * @date 2019-05-17 10:04
  * @version 1.0

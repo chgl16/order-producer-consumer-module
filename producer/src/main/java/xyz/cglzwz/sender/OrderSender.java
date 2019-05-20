@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import xyz.cglzwz.common.entity.Order;
 
 /**
- * 生成消息，发送
+ * 生产者生成消息，发送
  * @author chgl16
  * @date 2019-05-16 21:27
  * @version 1.0
