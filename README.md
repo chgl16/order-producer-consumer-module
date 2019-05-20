@@ -1,10 +1,10 @@
 # order-producer-consumer-module
     基于RabbitMQ消息中间件的订单投递消费模块，订单生产者和消费者，AMQP架构核心原理解析，消息可靠性方案
 ## 1. 环境
-![Spring Boot](https://img.shields.io/badge/SpringBoot-2.1.5-green.svg)&nbsp;
-![amqp](https://img.shields.io/badge/AMQP-starter-blue.svg)&nbsp;
-![web](https://img.shields.io/badge/Web-starter-red.svg)
-![test](https://img.shields.io/badge/Test-starter-yellow.svg)&nbsp;
+![Spring Boot](https://img.shields.io/badge/SpringBoot-2.1.5-green.svg)&nbsp;&nbsp;
+![amqp](https://img.shields.io/badge/AMQP-starter-blue.svg)&nbsp;&nbsp;
+![web](https://img.shields.io/badge/Web-starter-red.svg)&nbsp;&nbsp;
+![test](https://img.shields.io/badge/Test-starter-yellow.svg)&nbsp;&nbsp;
 ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-3.6.10-orange.svg)
 
 ## 2. 运行
@@ -104,7 +104,7 @@ public class OrderReceiver {
     }
 }
 ```
-> @RabbitHandler仅仅表明其是一个消息消费者，@RabbitListener注解可以绑定消费者到某特定交换机队列（不存在就会创建）  
+> *@RabbitHandler*仅仅表明其是一个消息消费者，*@RabbitListener*注解可以绑定消费者到某特定交换机队列（不存在就会创建）  
 
 > *@Payload Order order*这里Spring内部对从服务器队列获取到的Queue做反序列化，额外定义的Channel用于手工确认ACK反馈。
 
@@ -137,14 +137,14 @@ public class OrderSender {
     }
 }
 ```
-> 直接使用Spring提供操作的RabbitTemplate模板，*convertAndSend*有多个构造方法，注意选择使用。
+> 直接使用Spring提供操作的*RabbitTemplate*模板，*convertAndSend*有多个构造方法，注意选择使用。
 
 5. 因为消费者提前打开，所有一旦消费者发送订单消息，立即被消费，服务端*localhost:15672*显示的order-queue队列消息数是都为0的。当然如果关闭消费者，前提服务器端有消费者发送的指定交换机和相应绑定的队列，这时可见队列存在未消费的消息。
 
 ## 4. 注意
-* 在消费者反序列化Order对象时除了需要保证两边的Order类一样，SerialVersionUID一致外，还需要包名一致，不然一直报错*ClassNotFound*。
+* 在消费者反序列化Order对象时除了需要保证两边的Order类一样，*SerialVersionUID*一致外，还需要包名一致，不然一直报错*ClassNotFound*。
 * Durable的交换机和队列重启也会保存注册。
-* *xyz.cglzwz.xxApplication大包*下的测试类不能注入*xyz.cglzwz.common*打包下的bean。
+* *xyz.cglzwz.xxApplication*大包下的测试类不能注入*xyz.cglzwz.common*大包下的bean。
 * 一般选用手动ACK确认，因此消费者也需要使用Channel，即*channel.basicAck(deliveryTag, false);*
 
 
